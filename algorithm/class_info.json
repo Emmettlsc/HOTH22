@@ -42,8 +42,8 @@
 				"Lecture1": {
 					"instructor": "David Smallberg",
 					"lecture_timing": [
-						["Monday", "4:00", "4:50"],
-						["Wednesday", "4:00", "4:50"]
+						["Monday", "16:00", "16:50"],
+						["Wednesday", "16:00", "16:50"]
 					],
 					"rating": {
 						"Overall": 4.2,
@@ -55,17 +55,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "12:00", "1:50"]
+								["Friday", "12:00", "13:50"]
 							]
 						},
 						"Discussion1B": {
 							"discussion_timing": [
-								["Friday", "12:00", "1:50"]
+								["Friday", "12:00", "13:50"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "2:00", "3:50"]
+								["Friday", "14:00", "15:50"]
 							]
 						}
 					}
@@ -78,8 +78,8 @@
 				"Lecture1": {
 					"instructor": "David Smallberg",
 					"lecture_timing": [
-						["Monday", "6:00", "7:50"],
-						["Wednesday", "6:00", "7:50"]
+						["Monday", "18:00", "19:50"],
+						["Wednesday", "18:00", "19:50"]
 					],
 					"rating": {
 						"Overall": 4.0,
