@@ -1,0 +1,15 @@
+{
+	"query_id": "551d7",
+	"start_quarter": ["W", 20],
+	"classes_taken": ["CS31"],
+	"filters": [
+		"LOW AVOID TIME FRIDAY 16:00 18:00",
+		"HIGH PREFER INSTRUCTOR David Smallberg",
+		"HIGH AVOID CLASS_COMBO (CS32, CS35L)",
+		"HIGH PREFER CLASS_COMBO (CS33)",
+		"HIGH PREFER RATING WORKLOAD MORE_THAN 1.5",
+		"MUST AVOID TOTAL_UNITS MORE_THAN 15",
+		"HIGH AVOID TOTAL_UNITS LESS_THAN 12"
+	]
+}
+
