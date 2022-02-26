@@ -1,0 +1,35 @@
+{
+	"query_id": "551d7",
+	"sorted_configurations": {
+		"config1": {
+			"filter_scores": [1, 1, 0, 0, 0.75, 1, 1],
+			"classes": [["CS1", "Lecture1", "Discussion1A"], ["CS32", "Lecture1", "Discussion1A"], ["CS33", "Lecture1", "Discussion1C"], ["CS35L", "Lecture1", "Discussion1D"]],
+			"total_units": 15
+		},
+		"config2": {
+			"filter_scores": [1, 1, 1, 0, 1, 1, 1],
+			"classes": [["CS1", "Lecture1", "Discussion1A"], ["CS32", "Lecture1", "Discussion1C"], ["CS33", "Lecture1", "Discussion1E"], ["CS51A", "Lecture1", "Discussion1C"]],
+			"total_units": 15
+		},
+		"config3": {
+			"filter_scores": [0, 1, 1, 0, 1, 1, 1],
+			"classes": [["CS1", "Lecture1", "Discussion1A"], ["CS32", "Lecture1", "Discussion1B"], ["CS33", "Lecture1", "Discussion1C"], ["CS51A", "Lecture1", "Discussion1B"]],
+			"total_units": 15
+		},
+		"config4": {
+			"filter_scores": [1, 1, 0, 0, 0.67, 1, 1],
+			"classes": [["CS32", "Lecture1", "Discussion1A"], ["CS33", "Lecture1", "Discussion1C"], ["CS35L", "Lecture1", "Discussion1D"]],
+			"total_units": 13
+		},
+		"config5": {
+			"filter_scores": [1, 1, 1, 0, 1, 1, 1],
+			"classes": [["CS32", "Lecture1", "Discussion1C"], ["CS33", "Lecture1", "Discussion1E"], ["CS51A", "Lecture1", "Discussion1C"]],
+			"total_units": 13
+		},
+		"config6": {
+			"filter_scores": [0, 1, 1, 0, 1, 1, 1],
+			"classes": [["CS32", "Lecture1", "Discussion1B"], ["CS33", "Lecture1", "Discussion1C"], ["CS51A", "Lecture1", "Discussion1B"]],
+			"total_units": 13
+		},
+	}
+}
