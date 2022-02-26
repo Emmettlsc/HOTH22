@@ -18,7 +18,12 @@ for i in classes:
         cid = j.find("div").get("id").split("-")[0]
         day = j.find_all("p")[0].string
         timeList = j.find_all("p")[1].contents
-        time = str(timeList[0]) + str(timeList[2])
+        try:
+            time = str(timeList[0]) + str(timeList[2])
+        except:
+            classDict[classId]["lecTime"] = None
+            classDict[classId]["lecDate"] = None
+            continue
         if len(cid.split("_")) == 2:
             classDict[classId]["lecTime"] = time
             classDict[classId]["lecDate"] = day
@@ -37,7 +42,6 @@ for i in classes:
             classDict[longId]["lecName"] = className
         else:
             classDict[longIdList[1]+"_"+longIdList[2]][longId]["name"] = className
-    break
         #classDict[]
     #for j in i.contents:
     #x    print(j.contents)
