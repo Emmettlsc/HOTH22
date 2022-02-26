@@ -14,6 +14,18 @@ output["class_prerequisites"] = []
 classDict = {}
 howmany = 0
 weekdays = {"M":"Monday", "T":"Tuesday", "W": "Wednesday", "R": "Thursday", "F":"Friday"}
+
+descriptionsFile = open("CsCourseDescriptions.html")
+descriptionsHtml = descriptionsFile.read()
+descriptionsFile.close()
+descriptionSoup = BeautifulSoup(descriptionsHtml, "html.parser")
+#print(descriptionSoup.prettify())
+descriptionTags = descriptionSoup.find_all(class_="course-record")
+for i in descriptionTags:
+    #print(i)
+    title = i.find("h3").string.split(". ")
+    print(title[0])
+    output["all_classes"].append("COM SCI " + title[0])
 #Get info from schedule of classes
 for i in classes:
     #print(i.get("id"))
@@ -32,10 +44,8 @@ for i in classes:
         readableId = readableId + "M"
         idNumber = idNumber.replace("M","")
     readableId = "COM SCI " + readableId + idNumber
-    if "COM SCI 59" in readableId:
+    if "COM SCI 59" in readableId or "COM SCI 375" in readableId or "COM SCI 298" in readableId:
         continue
-    if not output["all_classes"] or output["all_classes"][len(output["all_classes"])-1] != readableId:
-        output["all_classes"].append(readableId)
     #print(readableId)
     if(readableId not in classDict.keys()):
         classDict[readableId]={}
@@ -80,16 +90,8 @@ for i in classes:
         if not classDict[readableId]["units"]:
             classDict[readableId]["units"] = j.string
     howmany = howmany + 1
-    if howmany == 10:
-        break
-    
 
-descriptionsFile = open("CsCourseDescriptions.html")
-descriptionsHtml = descriptionsFile.read()
-descriptionsFile.close()
-descriptionSoup = BeautifulSoup(descriptionsHtml, "html.parser")
-#print(descriptionSoup.prettify())
-descriptionTags = descriptionSoup.find_all(class_="course-record")
+
 output["class_info"] = classDict
 f=open("output", "w")
 f.write(str(output))
