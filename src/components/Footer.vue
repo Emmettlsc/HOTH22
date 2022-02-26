@@ -10,11 +10,11 @@
       <router-link to="/" class="item">
         Home
       </router-link>
-      <router-link to="/partner" class="item">
-        Partner
+      <router-link to="/Courses" class="item">
+        Planner
       </router-link>
-      <router-link to="/signup" class="item">
-        Sign up
+      <router-link to="/Courses" class="item">
+        Planner
       </router-link>
     </div>
     <div class="column">
@@ -24,18 +24,18 @@
       <router-link to="/about" class="item">
         About
       </router-link>
-      <router-link to="/Contact" class="item">
-        Contact
+      <router-link to="/about" class="item">
+        About
       </router-link>
     </div>
     <div class="column">
       <div class="col-header">
         More
       </div>
-      <router-link to="/login" class="item">
-        Login
+      <router-link to="/faq" class="item">
+        Questions
       </router-link>
-      <router-link to="/Contact" class="item">
+      <router-link to="/faq" class="item">
         Questions
       </router-link>
     </div>
