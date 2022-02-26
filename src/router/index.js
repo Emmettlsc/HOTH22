@@ -11,10 +11,26 @@ const routes = [
   },
   {
     path: "/courses",
-    namae: "Courses",
-    compnent: () => import("@/pages/courses/CoursePage.vue"),
+    name: "Courses",
+    component: () => import("@/pages/courses/CoursePage.vue"),
     meta: {
       title: "My Courses"
+    }
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: () => import("@/pages/more/About.vue"),
+    meta: {
+      title: "About Us"
+    }
+  },
+  {
+    path: "/faq",
+    name: "FAQ",
+    component: () => import("@/pages/more/Faq.vue"),
+    meta: {
+      title: "FAQs"
     }
   }
 ];

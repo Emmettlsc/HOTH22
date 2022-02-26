@@ -1,14 +1,14 @@
 <template>
   <div class="navbar" id="navbar-border" >
     <router-link to="/" class="logo-black">
-      course connect
+      course <span>connect</span>
     </router-link>
     <div class="navigation medium-hide" id="desktop-navigation-links">
       <router-link to="/about" class="navbar-link">
         About
       </router-link>
-      <router-link to="/partner" class="navbar-link">
-        Partner
+      <router-link to="/faq" class="navbar-link">
+        FAQs
       </router-link>
       <router-link to="/courses" class="navbar-link-signup">
         Course Planner
@@ -16,18 +16,12 @@
     </div>
     <div class="navigation-drop medium-show">
       <i class="fas fa-bars" @click="menuOpen = !menuOpen"></i>
-      <div class="menu-drop" :style="menuOpen ? 'height: 340px' : 'height: 0px; box-shadow: none; padding-top: 0;'">
+      <div class="menu-drop" :style="menuOpen ? 'height: 230px' : 'height: 0px; box-shadow: none; padding-top: 0;'">
         <router-link to="/about" class="navbar-link limit-width" @click="menuOpen = false">
           About
         </router-link>
-        <router-link to="/contact" class="navbar-link limit-width" @click="menuOpen = false">
-          Contact
-        </router-link>
-        <router-link to="/partner" class="navbar-link limit-width" @click="menuOpen = false">
-          Partner
-        </router-link>
-        <router-link to="/login" class="navbar-link limit-width" @click="menuOpen = false">
-          Login
+        <router-link to="/faq" class="navbar-link limit-width" @click="menuOpen = false">
+          FAQs
         </router-link>
         <router-link to="/courses" class="navbar-link limit-width" @click="menuOpen = false">
           Course Planner
@@ -71,9 +65,18 @@ export default {
     font-size: 28px;
     text-decoration: none;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition: .3s;
   }
   .logo-black:hover{
     color: var(--primary-color);
+  }
+  .logo-black span{
+    color: var(--primary-color);
+    transition-delay: .1s;
+    transition-duration: .3s;
+  }
+  .logo-black:hover span{
+    color: black;
   }
   .navbar-link{
     padding: 25px 35px;
