@@ -3,51 +3,95 @@ f = open("CsClassesPage1.html", "r")
 classList=f.read()
 f.close()
 from bs4 import BeautifulSoup
-soup = BeautifulSoup(classList, 'html.parser')
+scheduleSoup = BeautifulSoup(classList, 'html.parser')
 #print(soup.prettify())
-classes=soup.find_all(class_="row-fluid data_row primary-row class-info class-not-checked")
+classes=scheduleSoup.find_all(class_="row-fluid data_row primary-row class-info class-not-checked")
+#Set up output
+output = {}
+output["all_classes"] = []
+output["required_classes"] = []
+output["class_prerequisites"] = []
 classDict = {}
+howmany = 0
+weekdays = {"M":"Monday", "T":"Tuesday", "W": "Wednesday", "R": "Thursday", "F":"Friday"}
+#Get info from schedule of classes
 for i in classes:
     #print(i.get("id"))
     #print(i.contents)
     #print(i)
     classId = i.get("id")
-    classDict[classId]={}
+    idNumber = classId.split("COMSCI")[1].lstrip("0")
+    readableId = ""
+    if "CC" in idNumber:
+        readableId = readableId + "C"
+        idNumber = idNumber.replace("CC","C")
+    elif "CM" in idNumber:
+        readableId = readableId + "CM"
+        idNumber = idNumber.replace("CM","")
+    elif "M" in idNumber:
+        readableId = readableId + "M"
+        idNumber = idNumber.replace("M","")
+    readableId = "COM SCI " + readableId + idNumber
+    if "COM SCI 59" in readableId:
+        continue
+    if not output["all_classes"] or output["all_classes"][len(output["all_classes"])-1] != readableId:
+        output["all_classes"].append(readableId)
+    #print(readableId)
+    if(readableId not in classDict.keys()):
+        classDict[readableId]={}
+    classDict[readableId][classId] = {}
+    classDict[readableId][classId]["discussion_timing"] = {}
     timeCol = i.find_all(class_="timeColumn")
     for j in timeCol:
         cid = j.find("div").get("id").split("-")[0]
         day = j.find_all("p")[0].string
         timeList = j.find_all("p")[1].contents
-        try:
-            time = str(timeList[0]) + str(timeList[2])
-        except:
-            classDict[classId]["lecTime"] = None
-            classDict[classId]["lecDate"] = None
-            continue
         if len(cid.split("_")) == 2:
-            classDict[classId]["lecTime"] = time
-            classDict[classId]["lecDate"] = day
+            classDict[readableId][classId]["lecture_timing"] = []
+            for dayLetter in day:
+                try:
+                    classDict[readableId][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                except:
+                    classDict[readableId][classId]["lecture_timing"].append([day, "N/A", "N/A"])
+                    continue
         else:
-            classDict[classId][cid] = {}
-            classDict[classId][cid]["time"] = time
-            classDict[classId][cid]["day"] = day
+            classDict[readableId][classId]["discussion_timing"][cid] = []
+            for dayLetter in day:
+                classDict[readableId][classId]["discussion_timing"][cid].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
     className = i.find_all("label")
     for j in className:
         longId = j.get("for").split("-")[0]
         longIdList = longId.split("_")
-        print(longIdList)
+        #print(longIdList)
         className = j.string
-        print(className)
+        #print(className)
         if len(longIdList) == 2:
-            classDict[longId]["lecName"] = className
-        else:
-            classDict[longIdList[1]+"_"+longIdList[2]][longId]["name"] = className
-        #classDict[]
-    #for j in i.contents:
-    #x    print(j.contents)
-    #for j in i.contents[1].find_all(class_="timeColumn"):
-    #    print(j)
-    #for j in i.contents:
-    #    print(j)
+            classDict[readableId][longId]["lecName"] = className
+        #else:
+        #    classDict[readableId][longIdList[1]+"_"+longIdList[2]][longId]["name"] = className
+    instructorCol = i.find_all(class_="instructorColumn hide-small")
+    classDict[readableId]["instructor"] = []
+    classDict[readableId]["units"] = []
+    for j in instructorCol:
+        if not classDict[readableId]["instructor"]:
+            classDict[readableId]["instructor"] = j.string
+    unitCol = i.find_all(class_="unitsColumn")
+    for j in unitCol:
+        if not classDict[readableId]["units"]:
+            classDict[readableId]["units"] = j.string
+    howmany = howmany + 1
+    if howmany == 10:
+        break
+    
 
-print(classDict)
+descriptionsFile = open("CsCourseDescriptions.html")
+descriptionsHtml = descriptionsFile.read()
+descriptionsFile.close()
+descriptionSoup = BeautifulSoup(descriptionsHtml, "html.parser")
+#print(descriptionSoup.prettify())
+descriptionTags = descriptionSoup.find_all(class_="course-record")
+output["class_info"] = classDict
+f=open("output", "w")
+f.write(str(output))
+f.close()
+print(output)
