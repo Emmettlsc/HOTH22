@@ -51,28 +51,31 @@ for i in classes:
     #print(readableId)
     if(readableId not in classDict.keys()):
         classDict[readableId]={}
-        classDict[readableId]["lecture_info"] = {}
-    classDict[readableId]["lecture_info"][classId] = {}
-    classDict[readableId]["lecture_info"][classId] = {}
-    classDict[readableId]["lecture_info"][classId]["discussion_timing"] = {}
+        classDict[readableId]["lecture_sections"] = {}
+    classDict[readableId]["lecture_sections"][classId] = {}
+    classDict[readableId]["lecture_sections"][classId] = {}
+    classDict[readableId]["lecture_sections"][classId]["discussion_sections"] = {}
     timeCol = i.find_all(class_="timeColumn")
     for j in timeCol:
         cid = j.find("div").get("id").split("-")[0]
+        if(len(cid.split("_")) > 2):
+            classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid] = {}
+        print(classDict[readableId]["lecture_sections"][classId]["discussion_sections"])
         day = j.find_all("p")[0].string
         timeList = j.find_all("p")[1].contents
         if len(cid.split("_")) == 2:
-            classDict[readableId]["lecture_info"][classId]["lecture_timing"] = []
+            classDict[readableId]["lecture_sections"][classId]["lecture_timing"] = []
             for dayLetter in day:
                 try:
-                    classDict[readableId]["lecture_info"][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                    classDict[readableId]["lecture_sections"][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
                 except:
                     bad_classes.append(readableId)
                     classDict[readableId] = None
                     break
         else:
-            classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid] = []
+            classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid]["discussion_timing"] = []
             for dayLetter in day:
-                classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid]["discussion_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
     className = i.find_all("label")
     if readableId in bad_classes:
         continue
@@ -82,17 +85,18 @@ for i in classes:
         #print(longIdList)
         className = j.string
         #print(className)
+        className = className.replace("Select ", "")
         if len(longIdList) == 2:
-            classDict[readableId]["lecture_info"][longId]["lecture_names"] = className.replace("Select ", "")
-        #else:
-        #    classDict[readableId][longIdList[1]+"_"+longIdList[2]][longId]["name"] = className
+            classDict[readableId]["lecture_sections"][longId]["lecture_names"] = className
+        else:
+            classDict[readableId]["lecture_sections"][longIdList[1]+"_"+longIdList[2]]["discussion_sections"][longId]["sectionName"] = className
     instructorCol = i.find_all(class_="instructorColumn hide-small")
     #print(instructorCol)
-    classDict[readableId]["lecture_info"]["instructor"] = []
+    classDict[readableId]["lecture_sections"]["instructor"] = []
     classDict[readableId]["units"] = []
     for j in instructorCol:
-        if not classDict[readableId]["lecture_info"]["instructor"]:
-            classDict[readableId]["lecture_info"]["instructor"] = j.string #TODO: Fix multiple instructor classes
+        if not classDict[readableId]["lecture_sections"]["instructor"]:
+            classDict[readableId]["lecture_sections"]["instructor"] = j.string #TODO: Fix multiple instructor classes
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
         if not classDict[readableId]["units"]:
@@ -128,7 +132,6 @@ for i in descriptionTags:
             elif re.match("[cmCM]*[0-9]{1,3}[:alpha:]*", word) and currentDept:
                 #print(word)
                 output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
-
             last_word = word
 f=open("output", "w")
 f.write(str(output))
