@@ -9,7 +9,8 @@ classes=scheduleSoup.find_all(class_="row-fluid data_row primary-row class-info 
 #Set up output
 output = {}
 output["all_classes"] = []
-output["required_classes"] = []
+output["required_classes"] = ["COM SCI 1", "COM SCI 31", "COM SCI 32", "COM SCI 35L", "COM SCI M51A", "COM SCI 111", "COM SCI 118", 
+    "COM SCI 131", "COM SCI M151B", "COM SCI M152A", "COM SCI 180", "COM SCI 181", "COM SCI 130"]
 output["class_prerequisites"] = {}
 classDict = {}
 howmany = 0
@@ -83,15 +84,14 @@ for i in classes:
     instructorCol = i.find_all(class_="instructorColumn hide-small")
     #print(instructorCol)
     classDict[readableId]["lecture_info"]["instructor"] = []
-    classDict[readableId]["lecture_info"]["units"] = []
+    classDict[readableId]["units"] = []
     for j in instructorCol:
         if not classDict[readableId]["lecture_info"]["instructor"]:
             classDict[readableId]["lecture_info"]["instructor"] = j.string #TODO: Fix multiple instructor classes
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
-        if not classDict[readableId]["lecture_info"]["units"]:
-            classDict[readableId]["lecture_info"]["units"] = j.string
-    howmany = howmany + 1
+        if not classDict[readableId]["units"]:
+            classDict[readableId]["units"] = j.string
 output["class_info"] = classDict
 
 
@@ -104,7 +104,6 @@ for i in descriptionTags:
     textTitle = "COM SCI " + title[0]
     output["all_classes"].append(textTitle)
     output["class_prerequisites"][textTitle] = []
-    output["class_info"]["class_title"] = title[1]
     description = i.find_all("p")[1].string
     if description and ("requisite" in description.lower()):
         reqBreak = description.split("equisit")
@@ -116,12 +115,12 @@ for i in descriptionTags:
             #print(word) #TODO: Make it work with OR statements somehow
             if word == "course" or word == "courses":
                 currentDept = "COM SCI"
-            elif word in dept_codes.keys():
+            #elif word in dept_codes.keys():
                 #print(output["class_prerequisites"])
-                currentDept = dept_codes[word]
-            if last_word + " " + word in dept_codes.keys():
-                currentDept = dept_codes[last_word + " " + word]
-            elif re.match("[cmCM]*[0-9]{1,3}[:alpha:]*", word):
+             #   currentDept = dept_codes[word]
+            #if last_word + " " + word in dept_codes.keys():
+             #   currentDept = dept_codes[last_word + " " + word]
+            elif re.match("[cmCM]*[0-9]{1,3}[:alpha:]*", word) and currentDept:
                 #print(word)
                 output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
 
@@ -129,4 +128,4 @@ for i in descriptionTags:
 f=open("output", "w")
 f.write(str(output))
 f.close()
-#print(output)
+print(output)
