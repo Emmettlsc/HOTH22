@@ -98,7 +98,7 @@ for i in classes:
     for j in instructorCol:
         if not classDict[readableId]["lecture_sections"]["instructor"]:
             classDict[readableId]["lecture_sections"]["instructor"] = j.string #TODO: Fix multiple instructor classes
-        if j.string not in ["TA", "none", None]:
+        if j.string not in ["TA", "none", None] + output["all_profs"]:
             output["all_profs"].append(j.string)
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
