@@ -1,0 +1,221 @@
+{
+	"all_classes": ["CS1", "CS31", "CS32", "CS33", "CS35L", "CS51A"],
+	"required_classes": ["CS1", "CS31", "CS32", "CS33", "CS35L"],
+	"class_prerequisites":{
+		"CS1": [],
+		"CS31": [],
+		"CS32": ["CS31"],
+		"CS33": ["CS32"],
+		"CS35L": ["CS31"],
+		"CS51A": []
+	},
+	"class_info": {
+		"CS1": {
+			"units": 2,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "Eli Gafni",
+					"lecture_timing": [
+						["Monday", "10:00", "10:50"],
+						["Wednesday","10:00", "10:50"]
+					],
+					"rating": {
+						"Overall": 3.3,
+						"Easiness": 4.5,
+						"Clarity": 2.7,
+						"Workload": 4.5,
+						"Helpfulness": 2.4
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "9:00", "9:50"]
+							]
+						}
+					}
+				}
+			}
+		},
+		"CS31": {
+			"units": 4,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "David Smallberg",
+					"lecture_timing": [
+						["Monday", "16:00", "16:50"],
+						["Wednesday", "16:00", "16:50"]
+					],
+					"rating": {
+						"Overall": 4.2,
+						"Easiness": 3.2,
+						"Clarity": 4.3,
+						"Workload": 2.9,
+						"Helpfulness": 4.0
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "12:00", "13:50"]
+							]
+						},
+						"Discussion1B": {
+							"discussion_timing": [
+								["Friday", "12:00", "13:50"]
+							]
+						},
+						"Discussion1C": {
+							"discussion_timing": [
+								["Friday", "14:00", "15:50"]
+							]
+						}
+					}
+				}
+			}
+		},
+		"CS32": {
+			"units": 4,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "David Smallberg",
+					"lecture_timing": [
+						["Monday", "18:00", "19:50"],
+						["Wednesday", "18:00", "19:50"]
+					],
+					"rating": {
+						"Overall": 4.0,
+						"Easiness": 2.5,
+						"Clarity": 4.1,
+						"Workload": 2.2,
+						"Helpfulness": 3.9
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "10:00", "11:50"]
+							]
+						},
+						"Discussion1B": {
+							"discussion_timing": [
+								["Friday", "10:00", "11:50"]
+							]
+						},
+						"Discussion1C": {
+							"discussion_timing": [
+								["Friday", "12:00", "13:50"]
+							]
+						}
+					}
+				}
+			}
+		},
+		"CS33": {
+			"units": 5,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "Glenn Reinman",
+					"lecture_timing": [
+						["Monday", "10:00", "11:50"],
+						["Wednesday", "10:00", "11:50"]
+					],
+					"rating": {
+						"Overall": 4.3,
+						"Easiness": 3.1,
+						"Clarity": 4.0,
+						"Workload": 3.0,
+						"Helpfulness": 4.3
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "10:00", "11:50"]
+							]
+						},
+						"Discussion1C": {
+							"discussion_timing": [
+								["Friday", "12:00", "13:50"]
+							]
+						},
+						"Discussion1E": {
+							"discussion_timing": [
+								["Friday", "14:00", "15:50"]
+							]
+						}
+					}
+				}
+			}
+		},
+		"CS35L": {
+			"units": 4,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "Paul Eggert",
+					"lecture_timing": [
+						["Monday", "14:00", "15:50"],
+						["Wednesday", "14:00", "15:50"]
+					],
+					"rating": {
+						"Overall": 2.5,
+						"Easiness": 1.6,
+						"Clarity": 2.4,
+						"Workload": 1.5,
+						"Helpfulness": 2.5
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "10:00", "11:50"]
+							]
+						},
+						"Discussion1C": {
+							"discussion_timing": [
+								["Friday", "12:00", "13:50"]
+							]
+						},
+						"Discussion1D": {
+							"discussion_timing": [
+								["Friday", "14:00", "15:50"]
+							]
+						}
+					}
+				}
+			}
+		},
+		"CS51A": {
+			"units": 4,
+			"lecture_sections": {
+				"Lecture1": {
+					"instructor": "Lei He",
+					"lecture_timing": [
+						["Monday", "16:00", "17:50"],
+						["Wednesday", "16:00", "17:50"]
+					],
+					"rating": {
+						"Overall": -1,
+						"Easiness": -1,
+						"Clarity": -1,
+						"Workload": -1,
+						"Helpfulness": -1
+					},
+					"discussion_sections": {
+						"Discussion1A": {
+							"discussion_timing": [
+								["Friday", "16:00", "17:50"]
+							]
+						},
+						"Discussion1B": {
+							"discussion_timing": [
+								["Thursday", "16:00", "17:50"]
+							]
+						},
+						"Discussion1C": {
+							"discussion_timing": [
+								["Friday", "10:00", "11:50"]
+							]
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
