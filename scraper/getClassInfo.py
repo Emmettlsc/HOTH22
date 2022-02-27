@@ -25,6 +25,7 @@ descriptionsFile.close()
 descriptionSoup = BeautifulSoup(descriptionsHtml, "html.parser")
 #print(descriptionSoup.prettify())
 
+bad_classes = []
     
 #Get info from schedule of classes
 for i in classes:
@@ -44,8 +45,9 @@ for i in classes:
         readableId = readableId + "M"
         idNumber = idNumber.replace("M","")
     readableId = "COM SCI " + readableId + idNumber
-    if "COM SCI 59" in readableId or "COM SCI 375" in readableId or "COM SCI 298" in readableId:
+    if "COM SCI 59" in readableId or "COM SCI 375" in readableId or "COM SCI 298" in readableId or readableId in bad_classes:
         continue
+
     #print(readableId)
     if(readableId not in classDict.keys()):
         classDict[readableId]={}
@@ -64,13 +66,16 @@ for i in classes:
                 try:
                     classDict[readableId]["lecture_info"][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
                 except:
-                    classDict[readableId]["lecture_info"][classId]["lecture_timing"].append([day, "N/A", "N/A"])
-                    continue
+                    bad_classes.append(readableId)
+                    classDict[readableId] = None
+                    break
         else:
             classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid] = []
             for dayLetter in day:
                 classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
     className = i.find_all("label")
+    if readableId in bad_classes:
+        continue
     for j in className:
         longId = j.get("for").split("-")[0]
         longIdList = longId.split("_")
@@ -91,11 +96,7 @@ for i in classes:
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
         if not classDict[readableId]["units"]:
-            try:
-                classDict[readableId]["units"] = int(j.string.split(".")[0])
-            except:
-                print(j.string)
-                classDict[readableId]["units"] = j.string
+            classDict[readableId]["units"] = int(j.string.split(".")[0])
 output["class_info"] = classDict
 
 
