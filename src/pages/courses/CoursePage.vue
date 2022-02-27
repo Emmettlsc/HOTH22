@@ -214,28 +214,15 @@ export default {
       .then(r => r.json())
       .then(data => {
         console.log(data);
-<<<<<<< HEAD
         this.outputClasses = data.sorted_configurations.config1.classes;
-      });
-=======
-        document.getElementById('loader').style = 'display: none';
-        this.outputClassList = data;
       });
       
     },
     formatOutput(o){
-<<<<<<< HEAD
       let name = o[0];
       let lec = o[1];
       let disc = o[2];
       return name + ' ('+lec+', '+disc+') ';
-=======
-      let name = o.name;
-      let units = o.info.units;
-      let prof = o.info.lecture_sections.instructor;
-      return name + ' ('+units+' units'+') ' + 'taught by ' + prof;
->>>>>>> 6283800bd08ff612d1a3dee1f6891a264d165f08
->>>>>>> c3e4f776f487752d558e52980b2ab0a0d208e2b1
     }
   }
 }

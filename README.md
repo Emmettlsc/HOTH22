@@ -1,7 +1,7 @@
 # course-connect
 
 ## Project set
-This project requires Python3, Node.js(with npm), and the Python library "more_itertools" Install the first two in your favorite way, and the second with pip using ```pip3 install more_itertools```, then run 
+This project requires Python3, Node.js(with npm), and the Python library "more_itertools" Install the first two in your favorite way, and the second with pip using ```pip3 install more_itertools```, ```pip3 install requests``` then run 
 ```
 npm install
 ```
