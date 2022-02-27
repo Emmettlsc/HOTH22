@@ -6,6 +6,17 @@ import sys
 import argparse
 from datetime import datetime
 
+priority_rewards = {
+	"LOW": 1,
+	"HIGH": 2,
+	"MUST": 0
+}
+priority_costs = {
+	"LOW": -1,
+	"HIGH": -2,
+	"MUST": float('-inf')
+}
+
 # log info to stdout
 def log(str, log_type="INFO"):
 	print("[" + log_type + "]", str)
@@ -67,18 +78,89 @@ def combination_contains_overlap(class_info, combination):
 
 	return False
 
-# assign a score to each class combination based on filters in query
-def score_combination(class_info, query, combination):
-	score = 0
-	filter_scores = []
-	return score, filter_scores
-
 def units_in_combination(class_info, combination):
 	units = 0
 	for [class_, lecture_section, discussion_section] in combination:
 		units += class_info["class_info"][class_]["units"]
 
 	return units
+
+def time_condition(class_info, combination, time_condition_args):
+	#log("time_condition called")
+	return False
+
+def instructor_condition(class_info, combination, time_condition_args):
+	#log("instructor_condition called")
+	return False
+
+def class_combo_condition(class_info, combination, time_condition_args):
+	#log("class_combo_condition called")
+	classes = [elem[0] for elem in combination]
+	class_combo = time_condition_args.split("(")[1].split(")")[0].split(", ")
+	is_class_combo = set(class_combo).issubset(set(classes))
+	#log(str(is_class_combo) + " " + str(class_combo) + " is " + ("" if is_class_combo else "not ") + "subset of " + str(classes))
+	return is_class_combo
+
+def rating_condition(class_info, combination, rating_condition_args):
+	#log("rating_condition called")
+
+	return False
+
+def total_units_condition(class_info, combination, total_condition_args):
+	#log("total_units_condition called")
+	total_condition_args_words = total_condition_args.split(" ")
+	total_units = units_in_combination(class_info, combination)
+
+	comparator = total_condition_args_words[0]
+	rhs = int(total_condition_args_words[1])
+	if comparator == "LESS_THAN":
+		return total_units < rhs
+	if comparator == "MORE_THAN":
+		return total_units > rhs
+	else: #unexpected; we failed to prove condition true
+		return -1
+
+# True/False -> condition determined to be True/False, -1 -> condition indeterminate
+filter_condition_handler = {
+	"TIME": time_condition,
+	"INSTRUCTOR": instructor_condition,
+	"CLASS_COMBO": class_combo_condition,
+	"RATING": rating_condition,
+	"TOTAL_UNITS": total_units_condition,
+}
+
+def check_filter_condition(class_info, filter_condition, combination):
+	filter_condition_words = filter_condition.split(" ")
+	condition_type = filter_condition_words[0]
+	condition_args = " ".join(filter_condition_words[1:])
+	return filter_condition_handler[condition_type](class_info, combination, condition_args)
+
+def score_filter(class_info, filter, combination):
+	filter_score = 0
+	filter_words = filter.split(" ")
+	priority = filter_words[0]
+	action = filter_words[1]
+	filter_condition = " ".join(filter_words[2:])
+	filter_condition_eval = check_filter_condition(class_info, filter_condition, combination)
+	
+	if (filter_condition_eval==-1) or (filter_condition_eval==True and action=="PREFER") or (filter_condition_eval==False and action=="AVOID"):
+		return priority_rewards[priority]
+	else:
+		return priority_costs[priority]
+
+# assign a score to each class combination based on filters in query
+def score_combination(class_info, query, combination):
+	score = 0
+	filter_scores = []
+	for filter_ in query["filters"]:
+		filter_score = score_filter(class_info, filter_, combination)
+		if filter_score == float('-inf'):
+			return float('-inf'), None
+		else:
+			score += filter_score
+			filter_scores.append(filter_score)
+
+	return score, filter_scores
 
 # determine all possible non-overlapping schedule configurations of potential_classes
 # then remove configurations with -inf score, sort remaining in ascending order and return
@@ -140,7 +222,7 @@ def main(args):
 	with open(args.output_file, "w") as f:
 		f.write(json.dumps(query_response, indent=4))
 	log("Finished")
-	
+
 # parse user supplied arguments
 def parse_arguments(argv):
 	parser = argparse.ArgumentParser()
