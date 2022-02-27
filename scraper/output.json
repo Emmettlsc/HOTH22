@@ -215,12 +215,14 @@
         "Distefano, J.",
         "Zheng, D.H.",
         "Pellegrini, M.",
+        "Shaked, S.",
         "Gu, Q.",
         "Varghese, G.",
         "Zhang, L.",
         "Abari, O.",
         "Sankararaman, S.",
         "Kim, M.",
+        "Kung, K.C.",
         "Xu, H.",
         "Palsberg, J.",
         "Sun, Y.",
@@ -1264,7 +1266,57 @@
             },
             "units": 5
         },
-        "COM SCI 118": null,
+        "COM SCI 118": {
+            "lecture_sections": {
+                "187350200_COMSCI0118": {
+                    "discussion_sections": {
+                        "187350201_187350200_COMSCI0118": {
+                            "discussion_timing": [
+                                "Friday",
+                                "10am",
+                                "11:50am"
+                            ],
+                            "sectionName": "Computer Science (COM SCI) 118 - Computer Network Fundamentals Dis 1A"
+                        },
+                        "187350202_187350200_COMSCI0118": {
+                            "discussion_timing": [
+                                "Friday",
+                                "12pm",
+                                "1:50pm"
+                            ],
+                            "sectionName": "Computer Science (COM SCI) 118 - Computer Network Fundamentals Dis 1B"
+                        }
+                    },
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "8am",
+                            "9:50am"
+                        ],
+                        [
+                            "Wednesday",
+                            "8am",
+                            "9:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 118 - Computer Network Fundamentals Lec 1",
+                    "instructor": "Lu, S."
+                },
+                "187350280_COMSCI0118": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "10am",
+                            "11:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 118 - Computer Network Fundamentals Lec 80",
+                    "instructor": "Lu, S."
+                }
+            },
+            "units": 4
+        },
         "COM SCI 130": {
             "lecture_sections": {
                 "187500200_COMSCI0130": {
@@ -2061,7 +2113,23 @@
             },
             "units": 4
         },
-        "COM SCI 192": null,
+        "COM SCI 192": {
+            "lecture_sections": {
+                "187842200_COMSCI0192": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "10am",
+                            "11:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 192 - Methods and Application of Collaborative Learning Theory in Life Sciences Sem 1",
+                    "instructor": "Shaked, S."
+                }
+            },
+            "units": 2
+        },
         "COM SCI 201": {
             "lecture_sections": {
                 "587005200_COMSCI0201": {
@@ -2194,7 +2262,23 @@
             },
             "units": 4
         },
-        "COM SCI 236": null,
+        "COM SCI 236": {
+            "lecture_sections": {
+                "587217280_COMSCI0236": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "10am",
+                            "11:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 236 - Computer Security Lec 80",
+                    "instructor": "Kung, K.C."
+                }
+            },
+            "units": 4
+        },
         "COM SCI 239002": {
             "lecture_sections": {
                 "587232210_COMSCI0239002": {
@@ -2283,8 +2367,83 @@
             },
             "units": 4
         },
-        "COM SCI 260B": null,
-        "COM SCI 263": null,
+        "COM SCI 260B": {
+            "lecture_sections": {
+                "587362200_COMSCI0260B": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "12pm",
+                            "1:50pm"
+                        ],
+                        [
+                            "Wednesday",
+                            "12pm",
+                            "1:50pm"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 260B - Algorithmic Machine Learning Lec 1",
+                    "instructor": "Meka, R."
+                },
+                "587362280_COMSCI0260B": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "10am",
+                            "11:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 260B - Algorithmic Machine Learning Lec 80",
+                    "instructor": "Meka, R."
+                }
+            },
+            "units": 4
+        },
+        "COM SCI 263": {
+            "lecture_sections": {
+                "587384201_COMSCI0263": {
+                    "discussion_sections": {
+                        "587384202_587384201_COMSCI0263": {
+                            "discussion_timing": [
+                                "Friday",
+                                "12pm",
+                                "1:50pm"
+                            ],
+                            "sectionName": "Computer Science (COM SCI) 263 - Natural Language Processing Dis 1A"
+                        }
+                    },
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "12pm",
+                            "1:50pm"
+                        ],
+                        [
+                            "Wednesday",
+                            "12pm",
+                            "1:50pm"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 263 - Natural Language Processing Lec 1",
+                    "instructor": "Chang, K."
+                },
+                "587384280_COMSCI0263": {
+                    "discussion_sections": {},
+                    "lecture_timing": [
+                        [
+                            "Monday",
+                            "10am",
+                            "11:50am"
+                        ]
+                    ],
+                    "lecture_names": "Computer Science (COM SCI) 263 - Natural Language Processing Lec 80",
+                    "instructor": "Chang, K."
+                }
+            },
+            "units": 4
+        },
         "COM SCI 267A": {
             "lecture_sections": {
                 "587398200_COMSCI0267A": {
