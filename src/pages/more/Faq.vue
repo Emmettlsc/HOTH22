@@ -5,7 +5,7 @@
       <i class="fas fa-angle-down" :style="openFaqs.indexOf(ind) == -1 ? 'transform: rotate(270deg)' : ''"/> 
       {{faq.q}}
     </div>
-    <div class="faq-a" :style="openFaqs.indexOf(ind) == -1 ? 'max-height: 0px' : 'max-height: 50px; margin: 20px 0'">
+    <div class="faq-a" :style="openFaqs.indexOf(ind) == -1 ? 'max-height: 0px' : 'max-height: 50px; margin-top: 20px; margin-bottom: 20px'">
       {{faq.a}}
     </div>
   </div>
@@ -18,8 +18,8 @@ export default {
     return{
       openFaqs: [],
       faqs:[
-        {q: 'This is Question 1',
-         a: 'This is answer 1'},
+        {q: 'What steps does course connect do to ensure user privacy concerns?',
+         a: 'Our platform does not store any user information.'},
 
         {q: 'This is Question 2',
         a: 'This is answer 2'},
@@ -55,12 +55,20 @@ export default {
   font-size: 20px;
   font-weight: 600;
   background: #dddddd;
-  padding: 15px 5px;
+  padding: 15px 10px;
   cursor: pointer;
+  background: white;
+  color: var(--primary-light);
+  border: 1px solid gray;
+  margin-top: -1px;
+}
+.fa-angle-down{
+  transition: .5s all;
 }
 .faq-a{
   text-align: left;
   overflow-y: clip;
   transition: .5s ease all;
+  margin-left: 25px;
 }
 </style>

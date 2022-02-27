@@ -13,9 +13,6 @@
       <router-link to="/Courses" class="item">
         Planner
       </router-link>
-      <router-link to="/Courses" class="item">
-        Planner
-      </router-link>
     </div>
     <div class="column">
       <div class="col-header">
@@ -24,17 +21,11 @@
       <router-link to="/about" class="item">
         About
       </router-link>
-      <router-link to="/about" class="item">
-        About
-      </router-link>
     </div>
     <div class="column">
       <div class="col-header">
         More
       </div>
-      <router-link to="/faq" class="item">
-        Questions
-      </router-link>
       <router-link to="/faq" class="item">
         Questions
       </router-link>
