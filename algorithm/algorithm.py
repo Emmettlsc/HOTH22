@@ -33,6 +33,7 @@ def gen_potential_classes(class_info, classes_taken):
 	return potential_classes-classes_taken
 
 def str_to_datetime(str):
+	print(str)
 	if ":" in str:
 		return datetime.strptime(str, '%I:%M%p')
 	else:
@@ -250,12 +251,12 @@ def gen_sorted_configurations(class_info, query, potential_classes):
 def main(args):
 	#Ensure class info and query files exist
 	assert os.path.exists(args.class_info_file), "specified class_info_file invalid"
-	assert os.path.exists(args.query_file), "specified query_file invalid"
+	#assert os.path.exists(args.query_file), "specified query_file invalid"
 
 	with open(args.class_info_file, "r") as f:
 		class_info = json.load(f)
-	with open(args.query_file, "r") as f:
-		query = json.load(f)
+	queryText = args.query_file
+	query = json.loads(queryText)
 
 	potential_classes = gen_potential_classes(class_info, set(query["classes_taken"]))
 	sorted_configurations = gen_sorted_configurations(class_info, query, potential_classes)
