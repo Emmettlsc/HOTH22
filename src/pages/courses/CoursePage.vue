@@ -122,7 +122,7 @@ export default {
     },
 
     generateClasses(){
-      let url = 'https://localhost:3000/api/recommend';
+      let url = 'http://localhost:3001/api/recommend';
       const options = {
         method: 'post',
         body: JSON.stringify({
