@@ -17,9 +17,11 @@ priority_costs = {
 	"MUST": float('-inf')
 }
 
+"""
 # log info to stdout
 def log(str, log_type="INFO"):
 	print("[" + log_type + "]", str)
+"""
 
 # determine required classes whose prerequisites have been taken
 # precondition: prerequisite for any required class is also a required class
@@ -107,6 +109,11 @@ def time_condition(class_info, combination, time_condition_args):
 
 def instructor_condition(class_info, combination, instructor_condition_args):
 	#log("instructor_condition called")
+	instructor_target = instructor_condition_args.strip()
+	for [class_, lecture_section, discussion_section] in combination:
+		instructor = class_info["class_info"][class_]["lecture_sections"][lecture_section]["instructor"]
+		if instructor_target == instructor:
+			return True
 	return False
 
 def class_combo_condition(class_info, combination, class_combo_condition_args):
@@ -119,6 +126,27 @@ def class_combo_condition(class_info, combination, class_combo_condition_args):
 
 def rating_condition(class_info, combination, rating_condition_args):
 	#log("rating_condition called")
+	rating_condition_args_words = rating_condition_args.split(" ")
+	rating_category = rating_condition_args_words[0].lower().capitalize()
+	comparator = rating_condition_args_words[1]
+	rhs = float(rating_condition_args_words[2])
+
+	ratings = []
+	for [class_, lecture_section, discussion_section] in combination:
+		rating = class_info["class_info"][class_]["lecture_sections"][lecture_section]["rating"][rating_category]
+		if rating != -1:
+			ratings.append(rating)
+
+	if len(ratings) == 0: #we failed to prove condition true/false -> indeterminate
+		return -1
+	else:
+		average_rating = sum(ratings)/len(ratings)
+		if comparator == "LESS_THAN":
+			return average_rating < rhs
+		if comparator == "MORE_THAN":
+			return average_rating > rhs
+		else: #unexpected; we failed to prove condition true/false -> indeterminate
+			return -1
 
 	return False
 
@@ -133,7 +161,7 @@ def total_units_condition(class_info, combination, total_units_condition_args):
 		return total_units < rhs
 	if comparator == "MORE_THAN":
 		return total_units > rhs
-	else: #unexpected; we failed to prove condition true
+	else: #unexpected; we failed to prove condition true/false -> indeterminate
 		return -1
 
 # True/False -> condition determined to be True/False, -1 -> condition indeterminate
@@ -236,16 +264,20 @@ def main(args):
 	query_response["query_id"] = query["query_id"]
 	query_response["sorted_configurations"] = sorted_configurations
 
+	"""
 	#Write to args.output_file
 	with open(args.output_file, "w") as f:
 		f.write(json.dumps(query_response, indent=4))
-	log("Finished")
+	"""
+	print(json.dumps(query_response, indent=4))
+	#log("Finished")
 
 # parse user supplied arguments
 def parse_arguments(argv):
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--class_info_file", type=str, help="class info json file", default="./class_info.json")
 	parser.add_argument("--query_file", type=str, help="class info json file", default="./sample_query.json")
+	parser.add_argument("--print_to_stdout", type=bool, help="write result to stdout or file", default=True)
 	parser.add_argument("--output_file", type=str, help="class info json file", default="./query_response.json")
 	return parser.parse_args(argv)
 
