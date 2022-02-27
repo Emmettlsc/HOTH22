@@ -239,6 +239,7 @@ def main(args):
 	#Write to args.output_file
 	with open(args.output_file, "w") as f:
 		f.write(json.dumps(query_response, indent=4))
+	print(json.dumps(query_response, indent=4))
 	log("Finished")
 
 # parse user supplied arguments

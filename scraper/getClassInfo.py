@@ -1,4 +1,5 @@
 import re
+import json
 f = open("CsClassesPage1.html", "r")
 classList=f.read()
 f.close()
@@ -74,9 +75,8 @@ for i in classes:
                     classDict[readableId] = None
                     break
         else:
-            classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid]["discussion_timing"] = []
             for dayLetter in day:
-                classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid]["discussion_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid]["discussion_timing"] = [weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])]
     className = i.find_all("label")
     if readableId in bad_classes:
         continue
@@ -93,11 +93,11 @@ for i in classes:
             classDict[readableId]["lecture_sections"][longIdList[1]+"_"+longIdList[2]]["discussion_sections"][longId]["sectionName"] = className
     instructorCol = i.find_all(class_="instructorColumn hide-small")
     #print(instructorCol)
-    classDict[readableId]["lecture_sections"]["instructor"] = []
+    classDict[readableId]["lecture_sections"][classId]["instructor"] = []
     classDict[readableId]["units"] = []
     for j in instructorCol:
-        if not classDict[readableId]["lecture_sections"]["instructor"]:
-            classDict[readableId]["lecture_sections"]["instructor"] = j.string #TODO: Fix multiple instructor classes
+        if not classDict[readableId]["lecture_sections"][classId]["instructor"]:
+            classDict[readableId]["lecture_sections"][classId]["instructor"] = j.string #TODO: Fix multiple instructor classes
         if j.string not in ["TA", "none", None] + output["all_profs"]:
             output["all_profs"].append(j.string)
     unitCol = i.find_all(class_="unitsColumn")
@@ -137,6 +137,6 @@ for i in descriptionTags:
                 output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
             last_word = word
 f=open("output.json", "w")
-f.write(str(output))
+f.write(json.dumps(output, indent=4))
 f.close()
-print(output)
+print(json.dumps(output, indent=4))
