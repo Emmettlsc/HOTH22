@@ -27,11 +27,11 @@ export default {
         {q: 'Who is course connect made for?',
         a: 'Course connect currently is for all UCLA Computer Science students, but we hope we can soon extend the platform to include all UCLA students'},
 
-        {q: '',
-        a: 'This is answer 3'},
+        {q: 'How do you recommend classes?',
+        a: 'Out algorithm incorporates class data, reviews, preferences, pre-reqs, timings, and options to find a possible '},
 
-        {q: 'This is Question 4',
-        a: 'This is answer 4'},
+        {q: 'How does this platform help underprivliged students?',
+        a: 'Underpriviliged students do not have access to the same mentors and resources that other students have. We aim to give every student accurate information and recommendations so they can achieve their full potential'},
 
         {q: 'Is course connect free?',
         a: 'Yes'}
