@@ -3,7 +3,7 @@
     "sorted_configurations": {
         "config1": {
             "filter_scores": [
-                1,
+                -2,
                 -2,
                 0,
                 -1,
@@ -27,7 +27,7 @@
         },
         "config2": {
             "filter_scores": [
-                1,
+                -2,
                 -2,
                 0,
                 -1,
@@ -51,7 +51,7 @@
         },
         "config3": {
             "filter_scores": [
-                1,
+                -2,
                 -2,
                 0,
                 -1,
@@ -75,7 +75,7 @@
         },
         "config4": {
             "filter_scores": [
-                1,
+                -2,
                 -2,
                 0,
                 -1,
@@ -99,7 +99,7 @@
         },
         "config5": {
             "filter_scores": [
-                1,
+                -2,
                 -2,
                 0,
                 -1,
@@ -123,7 +123,152 @@
         },
         "config6": {
             "filter_scores": [
+                -2,
+                -2,
+                0,
+                -1,
+                -2,
                 1,
+                1
+            ],
+            "classes": [
+                [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS32",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS35L",
+                    "Lecture1",
+                    "Discussion1C"
+                ]
+            ],
+            "total_units": 10
+        },
+        "config7": {
+            "filter_scores": [
+                -2,
+                -2,
+                0,
+                -1,
+                -2,
+                1,
+                1
+            ],
+            "classes": [
+                [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS32",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS35L",
+                    "Lecture1",
+                    "Discussion1D"
+                ]
+            ],
+            "total_units": 10
+        },
+        "config8": {
+            "filter_scores": [
+                -2,
+                -2,
+                0,
+                -1,
+                -2,
+                1,
+                1
+            ],
+            "classes": [
+                [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS32",
+                    "Lecture1",
+                    "Discussion1B"
+                ],
+                [
+                    "CS35L",
+                    "Lecture1",
+                    "Discussion1C"
+                ]
+            ],
+            "total_units": 10
+        },
+        "config9": {
+            "filter_scores": [
+                -2,
+                -2,
+                0,
+                -1,
+                -2,
+                1,
+                1
+            ],
+            "classes": [
+                [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS32",
+                    "Lecture1",
+                    "Discussion1B"
+                ],
+                [
+                    "CS35L",
+                    "Lecture1",
+                    "Discussion1D"
+                ]
+            ],
+            "total_units": 10
+        },
+        "config10": {
+            "filter_scores": [
+                -2,
+                -2,
+                0,
+                -1,
+                -2,
+                1,
+                1
+            ],
+            "classes": [
+                [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
+                    "CS32",
+                    "Lecture1",
+                    "Discussion1C"
+                ],
+                [
+                    "CS35L",
+                    "Lecture1",
+                    "Discussion1A"
+                ]
+            ],
+            "total_units": 10
+        },
+        "config11": {
+            "filter_scores": [
+                2,
                 -2,
                 0,
                 -1,
@@ -145,154 +290,9 @@
             ],
             "total_units": 8
         },
-        "config7": {
-            "filter_scores": [
-                1,
-                -2,
-                0,
-                -1,
-                -2,
-                1,
-                1
-            ],
-            "classes": [
-                [
-                    "CS32",
-                    "Lecture1",
-                    "Discussion1A"
-                ],
-                [
-                    "CS35L",
-                    "Lecture1",
-                    "Discussion1C"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
-                ]
-            ],
-            "total_units": 10
-        },
-        "config8": {
-            "filter_scores": [
-                1,
-                -2,
-                0,
-                -1,
-                -2,
-                1,
-                1
-            ],
-            "classes": [
-                [
-                    "CS32",
-                    "Lecture1",
-                    "Discussion1A"
-                ],
-                [
-                    "CS35L",
-                    "Lecture1",
-                    "Discussion1D"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
-                ]
-            ],
-            "total_units": 10
-        },
-        "config9": {
-            "filter_scores": [
-                1,
-                -2,
-                0,
-                -1,
-                -2,
-                1,
-                1
-            ],
-            "classes": [
-                [
-                    "CS32",
-                    "Lecture1",
-                    "Discussion1B"
-                ],
-                [
-                    "CS35L",
-                    "Lecture1",
-                    "Discussion1C"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
-                ]
-            ],
-            "total_units": 10
-        },
-        "config10": {
-            "filter_scores": [
-                1,
-                -2,
-                0,
-                -1,
-                -2,
-                1,
-                1
-            ],
-            "classes": [
-                [
-                    "CS32",
-                    "Lecture1",
-                    "Discussion1B"
-                ],
-                [
-                    "CS35L",
-                    "Lecture1",
-                    "Discussion1D"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
-                ]
-            ],
-            "total_units": 10
-        },
-        "config11": {
-            "filter_scores": [
-                1,
-                -2,
-                0,
-                -1,
-                -2,
-                1,
-                1
-            ],
-            "classes": [
-                [
-                    "CS32",
-                    "Lecture1",
-                    "Discussion1C"
-                ],
-                [
-                    "CS35L",
-                    "Lecture1",
-                    "Discussion1A"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
-                ]
-            ],
-            "total_units": 10
-        },
         "config12": {
             "filter_scores": [
-                1,
+                2,
                 -2,
                 0,
                 -1,
@@ -302,6 +302,11 @@
             ],
             "classes": [
                 [
+                    "CS1",
+                    "Lecture1",
+                    "Discussion1A"
+                ],
+                [
                     "CS32",
                     "Lecture1",
                     "Discussion1C"
@@ -310,11 +315,6 @@
                     "CS35L",
                     "Lecture1",
                     "Discussion1D"
-                ],
-                [
-                    "CS1",
-                    "Lecture1",
-                    "Discussion1A"
                 ]
             ],
             "total_units": 10

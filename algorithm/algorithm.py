@@ -31,13 +31,11 @@ def gen_potential_classes(class_info, classes_taken):
 	return potential_classes-classes_taken
 
 def str_to_datetime(str):
-	"""
 	if ":" in str:
 		return datetime.strptime(str, '%I:%M%p')
 	else:
 		return datetime.strptime(str, '%I%p')
-	"""
-	return datetime.strptime(str, '%H:%M')
+	#return datetime.strptime(str, '%H:%M')
 
 def add_interval(time_list, time_intervals):
 	day, s_time_str, e_time_str = time_list[0], time_list[1], time_list[2]
@@ -87,16 +85,34 @@ def units_in_combination(class_info, combination):
 
 def time_condition(class_info, combination, time_condition_args):
 	#log("time_condition called")
+	time_condition_args_words = time_condition_args.split(" ")
+	day, s_time_str, e_time_str = time_condition_args_words[0], time_condition_args_words[1], time_condition_args_words[2]
+	
+	s_time = str_to_datetime(s_time_str)
+	e_time = str_to_datetime(e_time_str)
+
+	time_intervals = {"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[]}
+	for [class_, lecture_section, discussion_section] in combination:
+		for lecture_time_list in class_info["class_info"][class_]["lecture_sections"][lecture_section]["lecture_timing"]:
+			add_interval(lecture_time_list, time_intervals)
+		for discussion_time_list in class_info["class_info"][class_]["lecture_sections"][lecture_section]["discussion_sections"][discussion_section]["discussion_timing"]:
+			add_interval(discussion_time_list, time_intervals)
+	day_time_intervals = time_intervals[day.lower().capitalize()]
+
+	for day_time_interval in day_time_intervals:
+		if overlap([(s_time, e_time), day_time_interval]):
+			return True
+	
 	return False
 
-def instructor_condition(class_info, combination, time_condition_args):
+def instructor_condition(class_info, combination, instructor_condition_args):
 	#log("instructor_condition called")
 	return False
 
-def class_combo_condition(class_info, combination, time_condition_args):
+def class_combo_condition(class_info, combination, class_combo_condition_args):
 	#log("class_combo_condition called")
 	classes = [elem[0] for elem in combination]
-	class_combo = time_condition_args.split("(")[1].split(")")[0].split(", ")
+	class_combo = class_combo_condition_args.split("(")[1].split(")")[0].split(", ")
 	is_class_combo = set(class_combo).issubset(set(classes))
 	#log(str(is_class_combo) + " " + str(class_combo) + " is " + ("" if is_class_combo else "not ") + "subset of " + str(classes))
 	return is_class_combo
@@ -106,9 +122,9 @@ def rating_condition(class_info, combination, rating_condition_args):
 
 	return False
 
-def total_units_condition(class_info, combination, total_condition_args):
+def total_units_condition(class_info, combination, total_units_condition_args):
 	#log("total_units_condition called")
-	total_condition_args_words = total_condition_args.split(" ")
+	total_condition_args_words = total_units_condition_args.split(" ")
 	total_units = units_in_combination(class_info, combination)
 
 	comparator = total_condition_args_words[0]
@@ -143,7 +159,9 @@ def score_filter(class_info, filter, combination):
 	filter_condition = " ".join(filter_words[2:])
 	filter_condition_eval = check_filter_condition(class_info, filter_condition, combination)
 	
-	if (filter_condition_eval==-1) or (filter_condition_eval==True and action=="PREFER") or (filter_condition_eval==False and action=="AVOID"):
+	if (filter_condition_eval==-1):
+		return 0
+	if (filter_condition_eval==True and action=="PREFER") or (filter_condition_eval==False and action=="AVOID"):
 		return priority_rewards[priority]
 	else:
 		return priority_costs[priority]

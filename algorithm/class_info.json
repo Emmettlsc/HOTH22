@@ -16,8 +16,8 @@
 				"Lecture1": {
 					"instructor": "Eli Gafni",
 					"lecture_timing": [
-						["Monday", "10:00", "10:50"],
-						["Wednesday","10:00", "10:50"]
+						["Monday", "10am", "10:50am"],
+						["Wednesday","10am", "10:50am"]
 					],
 					"rating": {
 						"Overall": 3.3,
@@ -29,7 +29,7 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "9:00", "9:50"]
+								["Friday", "9am", "9:50am"]
 							]
 						}
 					}
@@ -42,8 +42,8 @@
 				"Lecture1": {
 					"instructor": "David Smallberg",
 					"lecture_timing": [
-						["Monday", "16:00", "16:50"],
-						["Wednesday", "16:00", "16:50"]
+						["Monday", "4pm", "4:50pm"],
+						["Wednesday", "4pm", "4:50pm"]
 					],
 					"rating": {
 						"Overall": 4.2,
@@ -55,17 +55,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "12:00", "13:50"]
+								["Friday", "12pm", "1:50pm"]
 							]
 						},
 						"Discussion1B": {
 							"discussion_timing": [
-								["Friday", "12:00", "13:50"]
+								["Friday", "12pm", "1:50pm"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "14:00", "15:50"]
+								["Friday", "2pm", "3:50pm"]
 							]
 						}
 					}
@@ -78,8 +78,8 @@
 				"Lecture1": {
 					"instructor": "David Smallberg",
 					"lecture_timing": [
-						["Monday", "18:00", "19:50"],
-						["Wednesday", "18:00", "19:50"]
+						["Monday", "6pm", "7:50pm"],
+						["Wednesday", "6pm", "7:50pm"]
 					],
 					"rating": {
 						"Overall": 4.0,
@@ -91,17 +91,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "10:00", "11:50"]
+								["Friday", "10am", "11:50am"]
 							]
 						},
 						"Discussion1B": {
 							"discussion_timing": [
-								["Friday", "10:00", "11:50"]
+								["Friday", "10am", "11:50am"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "12:00", "13:50"]
+								["Friday", "12pm", "1:50pm"]
 							]
 						}
 					}
@@ -114,8 +114,8 @@
 				"Lecture1": {
 					"instructor": "Glenn Reinman",
 					"lecture_timing": [
-						["Monday", "10:00", "11:50"],
-						["Wednesday", "10:00", "11:50"]
+						["Monday", "10am", "11:50am"],
+						["Wednesday", "10am", "11:50am"]
 					],
 					"rating": {
 						"Overall": 4.3,
@@ -127,17 +127,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "10:00", "11:50"]
+								["Friday", "10am", "11:50am"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "12:00", "13:50"]
+								["Friday", "12pm", "1:50pm"]
 							]
 						},
 						"Discussion1E": {
 							"discussion_timing": [
-								["Friday", "14:00", "15:50"]
+								["Friday", "2pm", "3:50pm"]
 							]
 						}
 					}
@@ -150,8 +150,8 @@
 				"Lecture1": {
 					"instructor": "Paul Eggert",
 					"lecture_timing": [
-						["Monday", "14:00", "15:50"],
-						["Wednesday", "14:00", "15:50"]
+						["Monday", "2pm", "3:50pm"],
+						["Wednesday", "2pm", "3:50pm"]
 					],
 					"rating": {
 						"Overall": 2.5,
@@ -163,17 +163,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "10:00", "11:50"]
+								["Friday", "10am", "11:50am"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "12:00", "13:50"]
+								["Friday", "12pm", "1:50pm"]
 							]
 						},
 						"Discussion1D": {
 							"discussion_timing": [
-								["Friday", "14:00", "15:50"]
+								["Friday", "2pm", "3:50pm"]
 							]
 						}
 					}
@@ -186,8 +186,8 @@
 				"Lecture1": {
 					"instructor": "Lei He",
 					"lecture_timing": [
-						["Monday", "16:00", "17:50"],
-						["Wednesday", "16:00", "17:50"]
+						["Monday", "4pm", "5:50pm"],
+						["Wednesday", "4pm", "5:50pm"]
 					],
 					"rating": {
 						"Overall": -1,
@@ -199,17 +199,17 @@
 					"discussion_sections": {
 						"Discussion1A": {
 							"discussion_timing": [
-								["Friday", "16:00", "17:50"]
+								["Friday", "4pm", "5:50pm"]
 							]
 						},
 						"Discussion1B": {
 							"discussion_timing": [
-								["Thursday", "16:00", "17:50"]
+								["Thursday", "4pm", "5:50pm"]
 							]
 						},
 						"Discussion1C": {
 							"discussion_timing": [
-								["Friday", "10:00", "11:50"]
+								["Friday", "10am", "11:50am"]
 							]
 						}
 					}
