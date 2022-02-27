@@ -3,7 +3,7 @@
 	"start_quarter": ["W", 20],
 	"classes_taken": ["CS31"],
 	"filters": [
-		"LOW AVOID TIME FRIDAY 16:00 18:00",
+		"HIGH AVOID TIME FRIDAY 10am 12:00pm",
 		"HIGH PREFER INSTRUCTOR David Smallberg",
 		"MUST PREFER CLASS_COMBO (CS32, CS35L)",
 		"LOW PREFER CLASS_COMBO (CS33)",
