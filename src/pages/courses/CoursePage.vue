@@ -221,10 +221,10 @@ export default {
       
     },
     formatOutput(o){
-      let name = o.name;
-      let units = o.info.units;
-      let prof = o.info.lecture_sections.instructor;
-      return name + ' ('+units+' units'+') ' + 'taught by ' + prof;
+      let name = o[0];
+      let lec o[1];
+      let disc = o[2];
+      return name + ' ('+lec+', '+disc+') ';
     }
   }
 }
