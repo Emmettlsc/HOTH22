@@ -202,14 +202,7 @@ export default {
 
     generateClasses(){
       document.getElementById('loader').style = 'display: inline-block';
-      /*setTimeout(() => {
-        this.outputClassList.push({name: 'COM SCI 31', info: this.fullClassInfo['COM SCI 31']});
-        this.outputClassList.push({name: 'COM SCI 32', info: this.fullClassInfo['COM SCI 32']});
-        this.outputClassList.push({name: 'COM SCI 33', info: this.fullClassInfo['COM SCI 33']});
-        console.log(this.outputClassList[0]);
-        document.getElementById('loader').style = 'display: none'
-      }, 3000);
-      */let url = 'http://localhost:3001/api/recommend';
+      let url = 'http://localhost:3001/api/recommend';
       const options = {
         method: 'post',
         body: JSON.stringify({
