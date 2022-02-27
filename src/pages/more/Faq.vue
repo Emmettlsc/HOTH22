@@ -1,5 +1,8 @@
 <template>
 <div class="faq-page">
+  <div class="header">
+    Frequently Asked Questions
+  </div>
   <div v-for="(faq, ind) in faqs" :key="faq.question">
     <div class="faq-open-button" @click="toggleFaq(ind)">
       <i class="fas fa-angle-down" :style="openFaqs.indexOf(ind) == -1 ? 'transform: rotate(270deg)' : ''"/> 
@@ -19,19 +22,19 @@ export default {
       openFaqs: [],
       faqs:[
         {q: 'What steps does course connect do to ensure user privacy concerns?',
-         a: 'Our platform does not store any user information.'},
+         a: 'Our platform does not store any user information. We do not share or sell any data, nor do we allow any of our developers to tamper with these rules.'},
 
-        {q: 'This is Question 2',
-        a: 'This is answer 2'},
+        {q: 'Who is course connect made for?',
+        a: 'Course connect currently is for all UCLA Computer Science students, but we hope we can soon extend the platform to include all UCLA students},
 
-        {q: 'This is Question 3',
+        {q: '',
         a: 'This is answer 3'},
 
         {q: 'This is Question 4',
         a: 'This is answer 4'},
 
-        {q: 'This is Question 5',
-        a: 'This is answer 5'}
+        {q: 'Is course connect free?',
+        a: 'Yes'}
       ]
     }
   },
@@ -49,6 +52,12 @@ export default {
 <style scoped>
 .faq-page{
   padding: 100px 35px;
+}
+.header{
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  text-align: left;
 }
 .faq-open-button{
   text-align: left;

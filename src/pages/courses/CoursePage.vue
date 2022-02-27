@@ -74,7 +74,7 @@
 
 
   <div class="generate-region">
-    <button class="generate-button"> Generate Class Recomendations </button>
+    <button class="generate-button" @click="generateClasses()"> Generate Class Recomendations </button>
   </div>
 </div>
 </template>
@@ -119,6 +119,21 @@ export default {
 
     removeTimeRestriction(i){
       this.timeRestrictions.splice(i,1);
+    },
+
+    generateClasses(){
+      let url = 'https://localhost:3000/api/recommend';
+      const options = {
+        method: 'post',
+        body: JSON.stringify({
+          classes: this.studentCourses,
+          times: this.timeRestrictions,
+        }),
+        headers: {'Content-Type': 'application/json'}
+      };
+      fetch(url, options)
+      .then(r => r.json())
+      .then(data => console.log(data));
     }
   }
 }
