@@ -9,6 +9,7 @@ classes=scheduleSoup.find_all(class_="row-fluid data_row primary-row class-info 
 #Set up output
 output = {}
 output["all_classes"] = []
+output["all_profs"] = []
 output["required_classes"] = ["COM SCI 1", "COM SCI 31", "COM SCI 32", "COM SCI 35L", "COM SCI M51A", "COM SCI 111", "COM SCI 118", 
     "COM SCI 131", "COM SCI M151B", "COM SCI M152A", "COM SCI 180", "COM SCI 181", "COM SCI 130"]
 output["class_prerequisites"] = {}
@@ -97,6 +98,8 @@ for i in classes:
     for j in instructorCol:
         if not classDict[readableId]["lecture_sections"]["instructor"]:
             classDict[readableId]["lecture_sections"]["instructor"] = j.string #TODO: Fix multiple instructor classes
+        if j.string not in ["TA", "none", None] + output["all_profs"]:
+            output["all_profs"].append(j.string)
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
         if not classDict[readableId]["units"]:
@@ -133,7 +136,7 @@ for i in descriptionTags:
                 #print(word)
                 output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
             last_word = word
-f=open("output", "w")
+f=open("output.json", "w")
 f.write(str(output))
 f.close()
 print(output)
