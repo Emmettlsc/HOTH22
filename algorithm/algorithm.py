@@ -264,12 +264,12 @@ def main(args):
 	query_response["query_id"] = query["query_id"]
 	query_response["sorted_configurations"] = sorted_configurations
 
-	"""
-	#Write to args.output_file
-	with open(args.output_file, "w") as f:
-		f.write(json.dumps(query_response, indent=4))
-	"""
-	print(json.dumps(query_response, indent=4))
+	if args.print_to_stdout:
+		print(json.dumps(query_response, indent=4))
+	else:
+		#Write to args.output_file
+		with open(args.output_file, "w") as f:
+			f.write(json.dumps(query_response, indent=4))
 	#log("Finished")
 
 # parse user supplied arguments
@@ -277,8 +277,12 @@ def parse_arguments(argv):
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--class_info_file", type=str, help="class info json file", default="./class_info.json")
 	parser.add_argument("--query_file", type=str, help="class info json file", default="./sample_query.json")
-	parser.add_argument("--print_to_stdout", type=bool, help="write result to stdout or file", default=True)
 	parser.add_argument("--output_file", type=str, help="class info json file", default="./query_response.json")
+
+	parser.add_argument('--print_to_stdout', dest='print_to_stdout', action='store_true', help="Set to print to stdout.")
+	parser.add_argument('--write_to_file', dest='print_to_stdout', action='store_false', help="Set to write to file.")
+	parser.set_defaults(print_to_stdout=False)
+
 	return parser.parse_args(argv)
 
 if __name__ == '__main__':
