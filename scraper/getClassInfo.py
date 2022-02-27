@@ -91,7 +91,11 @@ for i in classes:
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
         if not classDict[readableId]["units"]:
-            classDict[readableId]["units"] = j.string
+            try:
+                classDict[readableId]["units"] = int(j.string.split(".")[0])
+            except:
+                print(j.string)
+                classDict[readableId]["units"] = j.string
 output["class_info"] = classDict
 
 
