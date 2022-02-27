@@ -25,7 +25,7 @@ export default {
          a: 'Our platform does not store any user information. We do not share or sell any data, nor do we allow any of our developers to tamper with these rules.'},
 
         {q: 'Who is course connect made for?',
-        a: 'Course connect currently is for all UCLA Computer Science students, but we hope we can soon extend the platform to include all UCLA students},
+        a: 'Course connect currently is for all UCLA Computer Science students, but we hope we can soon extend the platform to include all UCLA students'},
 
         {q: '',
         a: 'This is answer 3'},

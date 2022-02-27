@@ -93,6 +93,8 @@ export default {
       timeRestrictions: [],
       curStartTime: 8,
       curEndTime: 9,
+
+      outputClasses:[],
     }
   },
 
@@ -133,7 +135,10 @@ export default {
       };
       fetch(url, options)
       .then(r => r.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data);
+        this.outputClasses = data.sorted_configurations.config1.classes;
+      });
     }
   }
 }
