@@ -4,6 +4,8 @@ f = open("CsClassesPage1.html", "r")
 classList=f.read()
 f.close()
 from bs4 import BeautifulSoup
+import requests
+
 scheduleSoup = BeautifulSoup(classList, 'html.parser')
 #print(soup.prettify())
 classes=scheduleSoup.find_all(class_="row-fluid data_row primary-row class-info class-not-checked")
@@ -62,7 +64,7 @@ for i in classes:
         cid = j.find("div").get("id").split("-")[0]
         if(len(cid.split("_")) > 2):
             classDict[readableId]["lecture_sections"][classId]["discussion_sections"][cid] = {}
-        print(classDict[readableId]["lecture_sections"][classId]["discussion_sections"])
+        #print(classDict[readableId]["lecture_sections"][classId]["discussion_sections"])
         day = j.find_all("p")[0].string
         timeList = j.find_all("p")[1].contents
         if len(cid.split("_")) == 2:
@@ -135,7 +137,86 @@ for i in descriptionTags:
                 #print(word)
                 output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
             last_word = word
+
+default_rating = {}
+default_rating["Overall"] = -1.0
+default_rating["Easiness"] = -1.0
+default_rating["Clarity"] = -1.0
+default_rating["Workload"] = -1.0
+default_rating["Helpfulness"] = -1.0
+
+
+rating_arr = []
+for course in output["class_info"]:
+	if course is None:
+		continue
+	temp_key = (list((output["class_info"][course]["lecture_sections"]).keys())[0])
+	#print(output["class_info"][course]["lecture_info"][temp_key])
+	#print(temp_key)
+	instructor = output["class_info"][course]["lecture_sections"][temp_key]["instructor"]
+	if instructor is None:
+		instructor = "badname"
+	urlcourse = course.replace(" ", "-")
+	URL = "https://bruinwalk.com/classes/" + urlcourse.lower() + "/"
+	page = requests.get(URL)
+	soup = BeautifulSoup(page.text, 'html.parser')
+	profs = soup.find_all(class_="title-container")
+	overall_rating = soup.find_all(class_="overall-rating-container")
+	ratings = soup.find_all(class_="rating")
+	runner = 0
+	prof_runner = 0;
+	prof_last_name = "null"
+	added = False
+	for elm in overall_rating:
+		rating_group = {}
+		z = re.findall("(\">.*<\/a)", str(profs[prof_runner]))
+		prof_name = z[0].strip("\"></a")
+		prof_last_name = (re.findall("([A-Za-z-\.]*)$", prof_name))[0]
+		if prof_last_name is None:
+			print("NOOOOOO\n")
+		#rating_group["prof"]= prof_name
+		overall = (re.findall("([0-9]\.[0-9]|N\/A)", str(elm)))[0]
+		if overall == "N/A":
+			overall = "-1.0"
+		rating_group["Overall"] = float(overall)
+		easiness = (re.findall("([0-9]\.[0-9]|N\/A)", str(ratings[runner+0])))[0]
+		if easiness == "N/A":
+			easiness = "-1.0"
+		rating_group["Easiness"] = float(easiness)
+		clarity = (re.findall("([0-9]\.[0-9]|N\/A)", str(ratings[runner+1])))[0]
+		if clarity == "N/A":
+			clarity = "-1.0"
+		rating_group["Clarity"] = float(clarity)
+		workload = (re.findall("([0-9]\.[0-9]|N\/A)", str(ratings[runner+2])))[0]
+		if workload == "N/A":
+			workload = "-1.0"
+		rating_group["Workload"] = float(workload)
+		helpfulness = (re.findall("([0-9]\.[0-9]|N\/A)", str(ratings[runner+3])))[0]
+		if helpfulness == "N/A":
+			helpfulness = "-1.0"
+		rating_group["Helpfulness"] = float(helpfulness)
+		rating_arr.append(rating_group)
+		added = True
+		runner+=4
+		prof_runner+=1
+	#print(instructor)
+	#print(prof_last_name)
+	if prof_last_name is None:
+		output["class_info"][course]["lecture_sections"][temp_key]["rating"] = default_rating
+	if instructor is None:
+		output["class_info"][course]["lecture_sections"][temp_key]["rating"] = default_rating
+	if prof_last_name in instructor:
+		if added:
+			output["class_info"][course]["lecture_sections"][temp_key]["rating"] = rating_arr[-1]
+		else:
+			output["class_info"][course]["lecture_sections"][temp_key]["rating"] = default_rating
+	added = False
+
+
+
 f=open("output.json", "w")
 f.write(json.dumps(output, indent=4))
 f.close()
 print(json.dumps(output, indent=4))
+
+
