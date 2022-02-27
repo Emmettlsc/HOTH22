@@ -15,7 +15,7 @@ app.post("/api/recommend", (request, response) => {
     algorithm.stdout.on("data", (data) =>{
         response.json(data.toString());
         console.log(data.toString());
-
+        
     })
 
 });
