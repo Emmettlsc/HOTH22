@@ -10,22 +10,21 @@ classes=scheduleSoup.find_all(class_="row-fluid data_row primary-row class-info 
 output = {}
 output["all_classes"] = []
 output["required_classes"] = []
-output["class_prerequisites"] = []
+output["class_prerequisites"] = {}
 classDict = {}
 howmany = 0
 weekdays = {"M":"Monday", "T":"Tuesday", "W": "Wednesday", "R": "Thursday", "F":"Friday"}
+dept_codes = {"Mathematics": "MATH", "Computer Engineering": "ECE", "Computing": "COMPTNG", 
+                "Environmental Engineering": "C&EE", "Statistics":"STATS", "Life Sciences": "LIFESCI",
+                "COM SCI":"COM SCI"}
 
 descriptionsFile = open("CsCourseDescriptions.html")
 descriptionsHtml = descriptionsFile.read()
 descriptionsFile.close()
 descriptionSoup = BeautifulSoup(descriptionsHtml, "html.parser")
 #print(descriptionSoup.prettify())
-descriptionTags = descriptionSoup.find_all(class_="course-record")
-for i in descriptionTags:
-    #print(i)
-    title = i.find("h3").string.split(". ")
-    print(title[0])
-    output["all_classes"].append("COM SCI " + title[0])
+
+    
 #Get info from schedule of classes
 for i in classes:
     #print(i.get("id"))
@@ -49,25 +48,27 @@ for i in classes:
     #print(readableId)
     if(readableId not in classDict.keys()):
         classDict[readableId]={}
-    classDict[readableId][classId] = {}
-    classDict[readableId][classId]["discussion_timing"] = {}
+        classDict[readableId]["lecture_info"] = {}
+    classDict[readableId]["lecture_info"][classId] = {}
+    classDict[readableId]["lecture_info"][classId] = {}
+    classDict[readableId]["lecture_info"][classId]["discussion_timing"] = {}
     timeCol = i.find_all(class_="timeColumn")
     for j in timeCol:
         cid = j.find("div").get("id").split("-")[0]
         day = j.find_all("p")[0].string
         timeList = j.find_all("p")[1].contents
         if len(cid.split("_")) == 2:
-            classDict[readableId][classId]["lecture_timing"] = []
+            classDict[readableId]["lecture_info"][classId]["lecture_timing"] = []
             for dayLetter in day:
                 try:
-                    classDict[readableId][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                    classDict[readableId]["lecture_info"][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
                 except:
-                    classDict[readableId][classId]["lecture_timing"].append([day, "N/A", "N/A"])
+                    classDict[readableId]["lecture_info"][classId]["lecture_timing"].append([day, "N/A", "N/A"])
                     continue
         else:
-            classDict[readableId][classId]["discussion_timing"][cid] = []
+            classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid] = []
             for dayLetter in day:
-                classDict[readableId][classId]["discussion_timing"][cid].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
+                classDict[readableId]["lecture_info"][classId]["discussion_timing"][cid].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
     className = i.find_all("label")
     for j in className:
         longId = j.get("for").split("-")[0]
@@ -76,24 +77,56 @@ for i in classes:
         className = j.string
         #print(className)
         if len(longIdList) == 2:
-            classDict[readableId][longId]["lecName"] = className
+            classDict[readableId]["lecture_info"][longId]["lecture_names"] = className.replace("Select ", "")
         #else:
         #    classDict[readableId][longIdList[1]+"_"+longIdList[2]][longId]["name"] = className
     instructorCol = i.find_all(class_="instructorColumn hide-small")
-    classDict[readableId]["instructor"] = []
-    classDict[readableId]["units"] = []
+    #print(instructorCol)
+    classDict[readableId]["lecture_info"]["instructor"] = []
+    classDict[readableId]["lecture_info"]["units"] = []
     for j in instructorCol:
-        if not classDict[readableId]["instructor"]:
-            classDict[readableId]["instructor"] = j.string
+        if not classDict[readableId]["lecture_info"]["instructor"]:
+            classDict[readableId]["lecture_info"]["instructor"] = j.string #TODO: Fix multiple instructor classes
     unitCol = i.find_all(class_="unitsColumn")
     for j in unitCol:
-        if not classDict[readableId]["units"]:
-            classDict[readableId]["units"] = j.string
+        if not classDict[readableId]["lecture_info"]["units"]:
+            classDict[readableId]["lecture_info"]["units"] = j.string
     howmany = howmany + 1
-
-
 output["class_info"] = classDict
+
+
+#Stuff from course description webpage
+descriptionTags = descriptionSoup.find_all(class_="course-record")
+for i in descriptionTags:
+    #print(i)
+    title = i.find("h3").string.split(". ")
+    #print(title)
+    textTitle = "COM SCI " + title[0]
+    output["all_classes"].append(textTitle)
+    output["class_prerequisites"][textTitle] = []
+    output["class_info"]["class_title"] = title[1]
+    description = i.find_all("p")[1].string
+    if description and ("requisite" in description.lower()):
+        reqBreak = description.split("equisit")
+        reqString = reqBreak[1].split(".")[0]
+       # print(textTitle + " " + reqString+"\n")
+        currentDept = ""
+        last_word = ""
+        for word in reqString.split(" "):
+            #print(word) #TODO: Make it work with OR statements somehow
+            if word == "course" or word == "courses":
+                currentDept = "COM SCI"
+            elif word in dept_codes.keys():
+                #print(output["class_prerequisites"])
+                currentDept = dept_codes[word]
+            if last_word + " " + word in dept_codes.keys():
+                currentDept = dept_codes[last_word + " " + word]
+            elif re.match("[cmCM]*[0-9]{1,3}[:alpha:]*", word):
+                #print(word)
+                output["class_prerequisites"][textTitle].append(currentDept + " " + word.replace(",",""))
+
+            last_word = word
 f=open("output", "w")
 f.write(str(output))
 f.close()
-print(output)
+#print(output)
