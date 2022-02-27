@@ -3,7 +3,7 @@
     <div class="about-header">
       About us
       <div class="header-text">
-        We're reimagining the future of class selection
+        We're reimagining the future of education
       </div>
     </div>
     <div class="about-flexer">
