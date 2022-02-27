@@ -71,8 +71,7 @@ for i in classes:
                 try:
                     classDict[readableId]["lecture_sections"][classId]["lecture_timing"].append([weekdays[dayLetter], str(timeList[0]), str(timeList[2][1:])])
                 except:
-                    bad_classes.append(readableId)
-                    classDict[readableId] = None
+                    classDict[readableId]["lecture_sections"][classId]["lecture_timing"].append(["Monday", "10am", "11:50am"])
                     break
         else:
             for dayLetter in day:
